@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 namespace Krevechous
 {
+    [RequireComponent(typeof(PlayerController))]
     public class GameManager : MonoBehaviour
     {
         [Header("Ивенты")]
