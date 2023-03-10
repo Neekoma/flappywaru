@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Krevechous
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerController))]
     public class Player : MonoBehaviour
     {
        
