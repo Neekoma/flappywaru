@@ -17,7 +17,7 @@ namespace Krevechous
             _rb = GetComponent<Rigidbody2D>();
 
 #if PLATFORM_ANDROID
-            inputModule = gameObject.AddComponent<PlayerInputPC>();
+            inputModule = gameObject.AddComponent<PlayerInputMobile>();
 
 #else
             inputModule = gameObject.AddComponent<PlayerInputMobile>();

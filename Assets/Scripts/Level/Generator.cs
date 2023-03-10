@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-   
-
     public void Next() {
     
     }

@@ -19,6 +19,11 @@ namespace Krevechous
         [Description("Вызывается когда игрок убирает паузу или разворачивает игру")]
         public UnityEvent OnGameResume;
 
+        private void Start()
+        {
+            OnGameStart.Invoke();
+        }
+
         private void OnApplicationPause(bool pause)
         {
             if (pause)
