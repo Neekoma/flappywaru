@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 namespace Krevechous
 {
-    [RequireComponent(typeof(PlayerController))]
-    public class GameManager : MonoBehaviour
+    public sealed class GameManager : MonoBehaviour
     {
         [Header("Ивенты")]
         [Description("Вызывается когда игрок нажимает кнопку \"Начать игру\"")]

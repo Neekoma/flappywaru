@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Krevechous
 {
     [RequireComponent(typeof(PlayerController))]
-    public class Player : MonoBehaviour
+    public sealed class Player : MonoBehaviour
     {
        
     }

@@ -5,29 +5,11 @@ using UnityEngine.Events;
 
 namespace Krevechous
 {
-    public class TubesPool : MonoBehaviour, IPool<Tube>
+    public sealed class TubesPool : Pool<TubeRecycleHandler>
     {
-        [SerializeField] private UnityEvent<Tube> _onRecycle;
-        public Queue<Tube> Pool { get; }
+        private Queue<TubeRecycleHandler> _tubes = new Queue<TubeRecycleHandler>();
 
-        public UnityEvent<Tube> OnRecycle => _onRecycle;
+        
 
-        public void Add(Tube obj)
-        {
-            
-            Pool.Enqueue(obj);
-        }
-
-        public Tube Extract()
-        {
-            return Pool.Peek();
-        }
-
-        public void Recycle()
-        {
-            var tube = Pool.Dequeue();
-            Pool.Enqueue(tube);
-            OnRecycle?.Invoke(tube);
-        }
     }
 }

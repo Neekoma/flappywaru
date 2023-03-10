@@ -9,29 +9,35 @@ namespace Krevechous
 
         private Rigidbody2D _rb;
 
-        [SerializeField] private float forcePower;
+        [SerializeField] private float jumpPower;
 
         private void Awake()
         {
-            PlayerInput inputModule;
             _rb = GetComponent<Rigidbody2D>();
-
-#if PLATFORM_ANDROID
-            inputModule = gameObject.AddComponent<PlayerInputMobile>();
-
-#else
-            inputModule = gameObject.AddComponent<PlayerInputMobile>();
-#endif
-
+            PlayerInput inputModule = GetPlayerInput();
             inputModule.onScreenJump.AddListener(Jump);
         }
 
 
         public void Jump()
         {
-            _rb.velocity = Vector2.zero;
-            _rb.AddForce(Vector2.up * forcePower, ForceMode2D.Impulse);
+            _rb.velocity = Vector2.up * jumpPower;
         }
 
+        /** <summary>Выбор управления в соответствии с управлением и добавление компонента на объект</summary>*/
+        private PlayerInput GetPlayerInput()
+        {
+
+            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                Debug.Log("Выбрана схема: Mobile");
+                return gameObject.AddComponent<PlayerInputMobile>();
+            }
+            else
+            {
+                Debug.Log("Desktop");
+                return gameObject.AddComponent<PlayerInputPC>();
+            }
+        }
     }
 }
