@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Krevechous.ObjectsRecycler;
 
 namespace Krevechous
 {
-    public sealed class TubesPool : Pool<TubeRecycleHandler>
+    public sealed class TubesPool : Pool<TubeRecycleAdapter>
     {
-        private Queue<TubeRecycleHandler> _tubes = new Queue<TubeRecycleHandler>();
 
-        
+
+
 
     }
 }

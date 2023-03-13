@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Krevechous.ObjectsRecycler;
 
 namespace Krevechous
 {
-    public abstract class Pool<T> : MonoBehaviour where T : MonoRecycleHandler
+    public abstract class Pool<T> : MonoBehaviour
     {
         protected Factory<T> factory;
 

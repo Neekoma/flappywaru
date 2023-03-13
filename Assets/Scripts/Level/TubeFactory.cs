@@ -4,26 +4,26 @@ using System.Data.SqlTypes;
 
 namespace Krevechous
 {
-    public sealed class TubeFactory : Factory<TubeRecycleHandler>
+    public sealed class TubeFactory : MonoBehaviour
     {
-        public TubeRecycleHandler GetTube()
-        {
-            return null;
-        }
+        //public TubeRecycleAdapter GetTube()
+        //{
+        //    return null;
+        //}
 
-        public TubeRecycleHandler GetTubeWithCoin()
-        {
-            return null;
-        }
+        //public TubeRecycleAdapter GetTubeWithCoin()
+        //{
+        //    return null;
+        //}
 
-        public TubeRecycleHandler GetTubeWithTrap()
-        {
-            throw new NotImplementedException();
-        }
+        //public TubeRecycleAdapter GetTubeWithTrap()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public TubeRecycleHandler GetTubeWithH()
-        {
-            throw new NotImplementedException();
-        }
+        //public TubeRecycleAdapter GetTubeWithH()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

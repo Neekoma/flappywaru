@@ -2,23 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using System;
 using UnityEngine.Events;
 
 namespace Krevechous
 {
     public sealed class GameManager : MonoBehaviour
     {
-        [Header("Ивенты")]
-        [Description("Вызывается когда игрок нажимает кнопку \"Начать игру\"")]
-        public UnityEvent OnGameStart;
-        [Description("Вызывается когда игрок нажимает проигрывает или завершает игру")]
-        public UnityEvent OnGameEnd;
-        [Description("Вызывается когда игрок нажимает паузу или сворачивает игру")]
-        public UnityEvent OnGamePause;
-        [Description("Вызывается когда игрок убирает паузу или разворачивает игру")]
-        public UnityEvent OnGameResume;
+        public static event Action OnGameStart;
+        public static event Action OnGameEnd;
+        public static event Action OnGamePause;
+        public static event Action OnGameResume;
 
-        private void Start()
+        private void Start() // TODO: старт по кнопке
         {
             OnGameStart.Invoke();
         }
@@ -26,8 +22,9 @@ namespace Krevechous
         private void OnApplicationPause(bool pause)
         {
             if (pause)
-                OnGamePause.Invoke();
-            OnGameResume.Invoke();
+                OnGamePause?.Invoke();
+
+            OnGameResume?.Invoke();
         }
 
         public void StartGame()
