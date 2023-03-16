@@ -35,7 +35,7 @@ namespace Krevechous
             }
             else
             {
-                Debug.Log("Desktop");
+                Debug.Log("\"Выбрана схема: Desktop");
                 return gameObject.AddComponent<PlayerInputPC>();
             }
         }

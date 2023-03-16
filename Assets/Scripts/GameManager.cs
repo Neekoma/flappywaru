@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using System;
-using UnityEngine.Events;
 
 namespace Krevechous
 {
@@ -14,9 +12,17 @@ namespace Krevechous
         public static event Action OnGamePause;
         public static event Action OnGameResume;
 
+        public bool IsGameReady { get; private set; }
+        public event Action OnGameReady;
+
+        private void Awake()
+        {
+            TubesPool.OnTubesReady += () => { IsGameReady = true; OnGameReady?.Invoke(); };
+        }
+
         private void Start() // TODO: старт по кнопке
         {
-            OnGameStart.Invoke();
+            OnGameReady += () => { OnGameStart?.Invoke(); };
         }
 
         private void OnApplicationPause(bool pause)
