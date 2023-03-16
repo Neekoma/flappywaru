@@ -11,20 +11,19 @@ namespace Krevechous.ObjectsRecycler
         private void Awake()
         {
             var pool = FindObjectOfType<TubesPool>();
+            pool.SendRecyclerToChildren(this);
+
             for (int i = 0; i < pool.transform.childCount; i++)
             {
                 recycleables.AddLast(pool.transform.GetChild(i).transform);
                 recycleables.Last.Value.position = new Vector3(recycleables.Last.Previous != null ? recycleables.Last.Previous.Value.position.x + 2.5f : recycleables.Last.Value.position.x, UnityEngine.Random.Range(-2f, 4f), 0);
             }
-
-
         }
 
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-
-            if (collision.TryGetComponent<TubeRecycleAdapter>(out TubeRecycleAdapter adapter))
+            if (collision.TryGetComponent(out TubeRecycleAdapter adapter))
             {
                 Debug.Log("Trigger");
                 Recycle(adapter);

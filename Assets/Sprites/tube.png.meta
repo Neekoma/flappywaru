@@ -43,16 +43,16 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 1
-  spriteMeshType: 1
+  spriteExtrude: 3
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 512
-  spriteBorder: {x: 69, y: 0, z: 71, w: 172}
+  spriteBorder: {x: 68, y: 0, z: 72, w: 171}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -140,7 +140,11 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: -118, y: 784.5}
+      - {x: -118, y: 830.5}
+      - {x: -84, y: 830.5}
+      - {x: -84, y: 784.5}
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000

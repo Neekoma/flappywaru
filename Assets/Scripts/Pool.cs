@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Krevechous.ObjectsRecycler;
+using TMPro.EditorUtilities;
 
 namespace Krevechous
 {
@@ -7,10 +8,14 @@ namespace Krevechous
     {
         protected Factory<T> factory;
 
-        protected int size;
-        public int Size => size;
-
-        public Factory<T> Factory => factory;
+        public void SendRecyclerToChildren(MonoRecycler recycler)
+        {
+            var adapters = transform.GetComponentsInChildren<MonoRecycleAdapter>();
+            foreach (var adapter in adapters)
+            {
+                adapter.Recycler = recycler;
+            }
+        }
 
 
 

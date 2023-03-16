@@ -4,30 +4,21 @@ using UnityEngine;
 namespace Krevechous.ObjectsRecycler
 {
 
-    public abstract class MonoRecycleAdapter<T> : MonoBehaviour, IRecycleable where T : MonoRecycler
+    public abstract class MonoRecycleAdapter : MonoBehaviour, IRecycleable
     {
         private MonoRecycler _recycler;
 
         public event Action OnBeforeRecycle;
         public event Action OnAfterRecycle;
 
-        public MonoRecycler Recycler { get { return _recycler; } set { _recycler = value; } }
-
-        protected void Awake()
+        public MonoRecycler Recycler
         {
-            FindRecycler();
+            get { return _recycler; }
+            set { _recycler = value; }
         }
 
-        /**<summary>Найти переработчик на сцене и получить ссылку на него</summary>>*/
-        private void FindRecycler() {
-            _recycler = FindObjectOfType<T>();
-            if (_recycler == null)
-                throw new RecyclerNotFoundException(typeof(T), $"Переработчик не был найден");
-        }
-        
-        public virtual void OnRecycle() { }
-        public virtual void BeforeRecycle() { OnBeforeRecycle?.Invoke(); }
-
-        public virtual void AfterRecycle() { OnAfterRecycle?.Invoke(); }
+        public abstract void OnRecycle();
+        public abstract void BeforeRecycle();
+        public abstract void AfterRecycle();
     }
 }

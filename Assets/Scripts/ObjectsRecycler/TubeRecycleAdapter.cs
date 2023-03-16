@@ -2,27 +2,21 @@ using UnityEngine;
 
 namespace Krevechous.ObjectsRecycler
 {
-    public sealed class TubeRecycleAdapter : MonoRecycleAdapter<TubesRecycler>
+    public sealed class TubeRecycleAdapter : MonoRecycleAdapter
     {
-
-        new private void Awake()
-        {
-            base.Awake();
-        }
-        
-
         public override void BeforeRecycle()
         {
-            base.BeforeRecycle();
+            
+          
         }
         public override void OnRecycle()
         {
-            base.OnRecycle();
+            Debug.Log($"Труба номер {gameObject.name} теперь не такая, какой была раньше");
         }
 
         public override void AfterRecycle()
         {
-            base.AfterRecycle();
+            
         }
     }
 }
