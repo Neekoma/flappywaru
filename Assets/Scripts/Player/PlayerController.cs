@@ -18,6 +18,8 @@ namespace Krevechous
             inputModule.onScreenJump.AddListener(Jump);
         }
 
+        
+
 
         public void Jump()
         {

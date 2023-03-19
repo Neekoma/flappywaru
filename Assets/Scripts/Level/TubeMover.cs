@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
 namespace Krevechous {
     public class TubeMover : MonoBehaviour {
 
@@ -31,5 +30,4 @@ namespace Krevechous {
         }
 
     }
-
 }

@@ -25,8 +25,8 @@ namespace Krevechous.ObjectsRecycler
             //Перерабатываем объект
             var first = pool.recycleables.First.Value;
             var last = pool.recycleables.Last.Value;
-            var newHeight = UnityEngine.Random.Range(-2f, 4f);
-            first.position = new Vector3(last.position.x + 2.5f, newHeight, 0);
+            
+            first.transform.position = new Vector3(last.transform.position.x + ((TubesPool)pool).distanceBetweenTubes, first.transform.position.y, 0);
 
             obj.OnRecycle();
             

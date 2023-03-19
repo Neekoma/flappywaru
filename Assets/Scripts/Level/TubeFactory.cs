@@ -1,29 +1,20 @@
 using UnityEngine;
-using System;
-using System.Data.SqlTypes;
+
 
 namespace Krevechous
 {
-    public sealed class TubeFactory : MonoBehaviour
+    public sealed class TubeFactory
     {
-        //public TubeRecycleAdapter GetTube()
-        //{
-        //    return null;
-        //}
+        public static TubeType GetRandTubeType() {
+            int tubeType = Random.Range(0, 4);
+            return (TubeType) tubeType;
+        }
+        
 
-        //public TubeRecycleAdapter GetTubeWithCoin()
-        //{
-        //    return null;
-        //}
+    }
 
-        //public TubeRecycleAdapter GetTubeWithTrap()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public TubeRecycleAdapter GetTubeWithH()
-        //{
-        //    throw new NotImplementedException();
-        //}
+    public enum TubeType
+    {
+        Empty, WithCoin//, WithTrap, WithH, WithCannon
     }
 }

@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using Krevechous.ObjectsRecycler;
 using System;
+using Krevechous.ObjectsRecycler;
 
 namespace Krevechous
 {
@@ -11,13 +9,15 @@ namespace Krevechous
     {
         public static event Action OnTubesReady;
 
+        public float distanceBetweenTubes { get; } = 3f;
+ 
         protected override void Awake()
         {
             base.Awake();
         }
 
    
-        public override void ReturnToPool(Transform recycleable) {
+        public override void ReturnToPool(MonoBehaviour recycleable) {
             recycleables.RemoveFirst();
             recycleables.AddLast(recycleable);
         }
@@ -27,8 +27,12 @@ namespace Krevechous
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                recycleables.AddLast(transform.GetChild(i).transform);
-                recycleables.Last.Value.position = new Vector3(recycleables.Last.Previous != null ? recycleables.Last.Previous.Value.position.x + 2.5f : recycleables.Last.Value.position.x, UnityEngine.Random.Range(-2f, 4f), 0);
+                var recycleable = recycleables.AddLast((MonoBehaviour)transform.GetChild(i).GetComponent<IRecycleable>()).Value;
+
+                recycleable.transform.position = new Vector3(recycleables.Last.Previous != null
+                    ? recycleables.Last.Previous.Value.transform.position.x + distanceBetweenTubes 
+                    :recycleables.Last.Value.transform.position.x, recycleables.Last.Value.transform.position.y, 0);
+                 
                 yield return new WaitForEndOfFrame();
             }
             OnTubesReady?.Invoke();
