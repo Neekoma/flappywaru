@@ -2,7 +2,6 @@ using Krevechous.ObjectsRecycler;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 
@@ -14,7 +13,7 @@ namespace Krevechous
     {
         public static Action OnCoinPicked;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == Tags.PLAYER_TAG)
             {

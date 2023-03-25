@@ -13,17 +13,24 @@ namespace Krevechous
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
             PlayerInput inputModule = GetPlayerInput();
             inputModule.onScreenJump.AddListener(Jump);
         }
 
-        
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+            _rb.isKinematic = true;
+        }
 
+        public void AllowToMove() {
+            Debug.Log("Game start"); _rb.isKinematic = false;
+        }
 
         public void Jump()
         {
-            _rb.velocity = Vector2.up * jumpPower;
+            if (_rb.isKinematic == false)
+                _rb.velocity = Vector2.up * jumpPower;
         }
 
         /** <summary>Выбор управления в соответствии с управлением и добавление компонента на объект</summary>*/

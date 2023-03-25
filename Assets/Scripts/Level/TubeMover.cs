@@ -7,17 +7,19 @@ namespace Krevechous {
 
         [SerializeField] private float _moveSpeed;
 
-        private void Awake()
-        {
-            GameManager.OnGameStart += StartMoving;
-            GameManager.OnGamePause += StopMoving;
-        }
+        private Coroutine _movingCoroutine;
 
         public void StartMoving() {
-            StartCoroutine(MovingCoroutine());
+            _movingCoroutine = StartCoroutine(MovingCoroutine());
         }
 
-        public void StopMoving() { }
+        public void StopMoving() {
+            if (_movingCoroutine != null)
+            {
+                StopCoroutine(_movingCoroutine);
+                _movingCoroutine = null;
+            }
+        }
 
         private IEnumerator MovingCoroutine() {
 

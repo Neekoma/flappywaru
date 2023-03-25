@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -8,23 +9,18 @@ namespace Krevechous.ObjectsRecycler
     {
         [SerializeField] private Coin coin;
 
-        //[SerializeField] private Trap trap;
-        //[SerializeField] private Hentai hentai;
-        //[SerializeField] private Cannon cannon;
-        private Tube[] tubes;
-
         private float placeHeight;
 
         public event System.Action<TubeType, float> OnGetNewForm;
 
         private void Awake()
         {
-            tubes = transform.GetComponentsInChildren<Tube>();
+            OnRecycle();
         }
 
-        private float GetPlaceHeight(float x, float a, float b) // [-2; 2]
+        private float GetPlaceHeight(float x, float a, float b, float c) // [-5; 4]
         { 
-            return Mathf.Sin(x * a) + Mathf.Cos(x * b);
+            return (Mathf.Sin(x * a) * Mathf.Cos(x * b)) * c;
         }
         
         public override void BeforeRecycle()
@@ -34,17 +30,16 @@ namespace Krevechous.ObjectsRecycler
 
         public override void OnRecycle()
         {
-            placeHeight = GetPlaceHeight(Time.time, Random.Range(0f, 10f), Random.Range(0f, 10f));
-            foreach (var tube in tubes)
-                tube.SetHeight(placeHeight);
+            placeHeight = GetPlaceHeight(Random.Range(-1000f, 1000f), Random.Range(0f, 10f), Random.Range(0f, 10f), Random.Range(-5, 4));
+            transform.position = new Vector3(transform.position.x, placeHeight, 0);
             AfterRecycle();
         }
 
         public override void AfterRecycle()
         {
             Debug.Log("OnAfterRecycle");
-            coin.gameObject.SetActive(true);
-            coin.transform.localPosition = new Vector3(0, placeHeight - 1f, 0);
+            if(coin.gameObject.activeSelf == false)
+                coin.gameObject.SetActive(true);
         }
     }
 }

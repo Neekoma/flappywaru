@@ -1,5 +1,4 @@
-﻿using UnityEditor.TextCore.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Krevechous
 {
@@ -13,23 +12,7 @@ namespace Krevechous
 
         private bool isLower = false;
 
-        private void Awake()
-        {
-            _renderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<BoxCollider2D>();
-
-            if (transform.position.y < 0) isLower = true;
-        }
-
-
-        public void SetHeight(float y) { 
-            if (isLower)
-                _renderer.size = new Vector2(1, Mathf.Abs(transform.position.y + 1 - y + 0.8f) * 2); //14
-            else
-               _renderer.size = new Vector2(1, Mathf.Abs(-transform.position.y - 1 + y + 0.8f) * 2);
-
-            _collider.size = new Vector2(1, _renderer.size.y);
-        }
+       
     }
 
 }
