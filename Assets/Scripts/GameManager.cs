@@ -29,7 +29,6 @@ namespace Krevechous
         private void Awake()
         {
             Instance = this;
-            TubesPool.OnTubesReady += () => { IsGameReady = true; OnGameReady?.Invoke(); };
         }
 
         public void StartGame()

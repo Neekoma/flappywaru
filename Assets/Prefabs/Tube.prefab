@@ -257,14 +257,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299796814222693335}
-  - component: {fileID: 6109459641325939781}
-  - component: {fileID: 6959954456688536242}
   - component: {fileID: 4557991099249710667}
   - component: {fileID: 724036398653334068}
   - component: {fileID: 979990522308547217}
   - component: {fileID: 7315691138640812097}
+  - component: {fileID: 3567837216602023692}
+  - component: {fileID: 1071788040824436867}
   m_Layer: 0
-  m_Name: TubesPrefab
+  m_Name: Tube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,31 +288,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6109459641325939781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299796814222693334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bf16676543e7f4cbcc70bda32c6cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coin: {fileID: 4828393730891191685}
---- !u!114 &6959954456688536242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299796814222693334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899b13052c104eb4e97eb8791dce0eec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &4557991099249710667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -356,10 +331,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &979990522308547217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -422,6 +397,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 794292faeb3e5af4d88121b08727d35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3567837216602023692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299796814222693334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358a9530035c62c4e9f3a8455e413eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 4828393730891191685}
+--- !u!114 &1071788040824436867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299796814222693334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f78006cb6b44c64892228b90ea8d8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4896766377761521556

@@ -1,30 +1,36 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Krevechous
 {
 
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
     public class PlayerController : MonoBehaviour
     {
 
         private Rigidbody2D _rb;
+        private Animator _animator;
 
         [SerializeField] private float jumpPower;
 
         private void Awake()
         {
+            _rb = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+
             PlayerInput inputModule = GetPlayerInput();
             inputModule.onScreenJump.AddListener(Jump);
         }
 
         private void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
             _rb.isKinematic = true;
         }
 
         public void AllowToMove() {
-            Debug.Log("Game start"); _rb.isKinematic = false;
+            _animator.enabled = false; // TODO: replace with animations
+           _rb.isKinematic = false;
         }
 
         public void Jump()
