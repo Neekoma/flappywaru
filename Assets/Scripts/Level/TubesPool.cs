@@ -9,7 +9,7 @@ namespace Krevechous
     {
         public static event Action OnTubesReady;
 
-        public float distanceBetweenTubes { get; } = 4.5f;
+        public float distanceBetweenTubes { get; } = 3.5f;
 
         protected override void Awake()
         {

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Experimental.AI;
 
 namespace Krevechous
 {
@@ -7,12 +9,18 @@ namespace Krevechous
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class Tube : MonoBehaviour
     {
-        private SpriteRenderer _renderer;
-        private BoxCollider2D _collider;
+        public static UnityEvent OnTubePassed = new UnityEvent();
 
-        private bool isLower = false;
 
-       
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == Tags.PLAYER_TAG)
+            {
+                OnTubePassed?.Invoke();
+            }
+        }
+
+
     }
 
 }

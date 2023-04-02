@@ -11,10 +11,12 @@ public class StartButton : MonoBehaviour
 
     private void Awake()
     {
+        button = GetComponent<Button>();
         button.enabled = false;
         GameManager.OnGameReady += () =>
         {
-            button.enabled = true;
+            if(button != null)
+                button.enabled = true;
         };
     }
 }

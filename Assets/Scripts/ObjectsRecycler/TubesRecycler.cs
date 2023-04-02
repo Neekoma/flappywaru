@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Krevechous.ObjectsRecycler
 {
     public sealed class TubesRecycler : MonoRecycler
-    {
+    {   
         protected override void Awake()
         {
             base.Awake();
@@ -25,7 +24,7 @@ namespace Krevechous.ObjectsRecycler
             //Перерабатываем объект
             var first = pool.recycleables.First.Value;
             var last = pool.recycleables.Last.Value;
-            
+           
             first.transform.position = new Vector3(last.transform.position.x + ((TubesPool)pool).distanceBetweenTubes, first.transform.position.y, 0);
 
             obj.OnRecycle();

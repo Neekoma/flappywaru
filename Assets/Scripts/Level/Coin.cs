@@ -1,17 +1,13 @@
-using Krevechous.ObjectsRecycler;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
-
+using UnityEditor;
 
 namespace Krevechous
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Collider2D))]
     public sealed class Coin : MonoBehaviour
     {
-        public static Action OnCoinPicked;
+        public static UnityEvent OnCoinPicked = new UnityEvent();
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

@@ -1,12 +1,24 @@
-﻿namespace Krevechous {
+﻿using TMPro;
+using UnityEngine;
 
-    public sealed class PlayerRepository {
-    
-        public int Coins { get; set; }
+namespace Krevechous {
 
+    public sealed class PlayerRepository :MonoBehaviour {
+        [SerializeField] private TMP_Text text;
 
-        public PlayerRepository() {
-            Coin.OnCoinPicked += () => { Coins++; };
+        [SerializeField] public int Coins = 0;
+        [SerializeField] public int Score = 0;
+
+        private void Start()
+        {
+            Tube.OnTubePassed.AddListener(() => {
+                Score++;
+                text.text = Score.ToString();
+            });
+            Coin.OnCoinPicked.AddListener(() => {
+                Coins++;
+                Debug.Log($"Coins: {Coins}");
+            });
         }
     }
 }

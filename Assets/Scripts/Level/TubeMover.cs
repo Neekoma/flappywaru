@@ -2,12 +2,19 @@
 using UnityEngine;
 
 namespace Krevechous {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class TubeMover : MonoBehaviour {
 
+        private Rigidbody2D _rb;
 
-        [SerializeField] private float _moveSpeed;
+        [SerializeField] private const float MOVE_SPEED = 2f;
 
         private Coroutine _movingCoroutine;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody2D>();   
+        }
 
         public void StartMoving() {
             _movingCoroutine = StartCoroutine(MovingCoroutine());
@@ -24,10 +31,8 @@ namespace Krevechous {
         private IEnumerator MovingCoroutine() {
 
             for (; ; ) {
-
-                transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
-
-                yield return new WaitForEndOfFrame();            
+                _rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + Vector2.left, MOVE_SPEED * Time.fixedDeltaTime));
+                yield return new WaitForFixedUpdate();            
             }
         }
 

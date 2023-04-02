@@ -15,6 +15,9 @@ namespace Krevechous
         //public static event Action OnGameResume;
         //public static event Action OnGameRestarted;
 
+
+        public static GameManager Instance { get; private set; }
+
         public UnityEvent OnGameStart;
         public UnityEvent OnGameEnd;
         public UnityEvent OnGameRestart;
@@ -25,6 +28,7 @@ namespace Krevechous
 
         private void Awake()
         {
+            Instance = this;
             TubesPool.OnTubesReady += () => { IsGameReady = true; OnGameReady?.Invoke(); };
         }
 
