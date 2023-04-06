@@ -28,6 +28,7 @@ namespace Krevechous
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             Instance = this;
         }
 
