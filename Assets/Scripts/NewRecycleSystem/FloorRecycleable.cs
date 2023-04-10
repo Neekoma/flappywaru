@@ -14,7 +14,7 @@ namespace Krevechous.NewRecycleSystem
 
             transform.position = new Vector3(last.transform.position.x + distanceBetweenFloors, transform.position.y, 0);
 
-            pool?.recycleables.Remove(this);
+            pool?.recycleables.RemoveFirst();
             pool?.recycleables.AddLast(this);
         }
     }

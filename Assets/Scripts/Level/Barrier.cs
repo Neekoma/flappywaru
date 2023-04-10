@@ -4,10 +4,12 @@ namespace Krevechous {
     {
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log(collision.gameObject.tag);
-            if (collision.gameObject.tag == Tags.PLAYER_TAG)
+            if (GameManager.Instance.isPlaying)
             {
-                GameManager.Instance.RestartGame();
+                if (collision.gameObject.tag == Tags.PLAYER_TAG)
+                {
+                    GameManager.Instance.EndGame();
+                }
             }
         }
 

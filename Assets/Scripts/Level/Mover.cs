@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Krevechous {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -9,7 +8,7 @@ namespace Krevechous {
         [SerializeField] private const float MOVE_SPEED = 2f;
         [SerializeField] private bool movingOnStart;
 
-        private Coroutine _movingCoroutine;
+        private bool _isCanMove = false;
 
         private void Awake()
         {
@@ -20,42 +19,17 @@ namespace Krevechous {
 
         private void Start()
         {
-            if (!movingOnStart)
-            {
-                GameManager.Instance.OnGameStart.AddListener(() =>
-                {
-                    StartMoving();
-                });
-            }
-            else {
-                StartMoving();
-            }
-            GameManager.Instance.OnGameEnd.AddListener(() => {
-                StopMoving();
-            });
+            GameManager.Instance.OnGameStart.AddListener(() => { _isCanMove = true; });
+            GameManager.Instance.OnGameEnd.AddListener(() => { _isCanMove = false; });
+
+            if (movingOnStart) { _isCanMove = true; }
         }
 
-        public void StartMoving()
+        private void FixedUpdate()
         {
-            _movingCoroutine = StartCoroutine(MovingCoroutine());
-        }
-
-        public void StopMoving()
-        {
-            if (_movingCoroutine != null)
+            if (_isCanMove)
             {
-                StopCoroutine(_movingCoroutine);
-                _movingCoroutine = null;
-            }
-        }
-
-        private IEnumerator MovingCoroutine()
-        {
-
-            for (; ; )
-            {
-                _rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + Vector2.left, MOVE_SPEED * Time.fixedDeltaTime));
-                yield return new WaitForFixedUpdate();
+                _rb.MovePosition((Vector2)transform.position + Vector2.left * MOVE_SPEED * Time.fixedDeltaTime);
             }
         }
     }

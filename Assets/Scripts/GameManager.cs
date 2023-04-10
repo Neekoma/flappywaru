@@ -9,42 +9,48 @@ namespace Krevechous
 {
     public sealed class GameManager : MonoBehaviour
     {
-        //public static event Action OnGameStart;
-        //public static event Action OnGameEnd;
-        //public static event Action OnGamePause;
-        //public static event Action OnGameResume;
-        //public static event Action OnGameRestarted;
-
-
         public static GameManager Instance { get; private set; }
 
         public UnityEvent OnGameStart;
         public UnityEvent OnGameEnd;
         public UnityEvent OnGameRestart;
 
-        public static event Action OnGameReady;
+        public bool isPlaying { get; private set; } = true;
+
+        public bool IsGameStarted { get; private set; }
         public bool IsGameReady { get; private set; }
 
 
         private void Awake()
         {
-            Application.targetFrameRate = 60;
             Instance = this;
+            Application.targetFrameRate = 120;
+        }
+
+        private void Start()
+        {
+            SFXSource.Insntance.Subsribe();
         }
 
         public void StartGame()
         {
+            IsGameStarted = true;
+            isPlaying = true;
             OnGameStart.Invoke();
         }
 
         public void StartGame(AsyncOperation op) {
             Debug.Log("StartGameReset");
-            if(op.isDone)
+            if (op.isDone)
+            {
+                isPlaying = true;
                 OnGameStart.Invoke();
+            }
         }
 
         public void EndGame()
         {
+            isPlaying = false;
             OnGameEnd.Invoke();
         }
 

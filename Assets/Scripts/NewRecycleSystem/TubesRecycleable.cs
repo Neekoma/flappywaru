@@ -6,7 +6,7 @@ namespace Krevechous.NewRecycleSystem
 
     public class TubesRecycleable : Recycleable
     {
-        private static readonly float distanceBetweenTubes = 3.5f;
+        public static readonly float distanceBetweenTubes = 2.5f;
 
         [SerializeField] private Coin coin;
 
@@ -43,7 +43,7 @@ namespace Krevechous.NewRecycleSystem
 
             transform.position = new Vector3(last.transform.position.x + distanceBetweenTubes, placeHeight, 0);
 
-            pool?.recycleables.Remove(this);
+            pool?.recycleables.RemoveFirst();
             pool?.recycleables.AddLast(this);
 
             SetupOtherObjects();
