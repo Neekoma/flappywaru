@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Krevechous.NewRecycleSystem;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.AI;
 
@@ -11,16 +13,18 @@ namespace Krevechous
     {
         public static UnityEvent OnTubePassed = new UnityEvent();
 
+        public bool _isPassed { get; set; } = false;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == Tags.PLAYER_TAG)
+            if (_isPassed == false)
             {
-                OnTubePassed?.Invoke();
+                if (collision.gameObject.tag == Tags.PLAYER_TAG)
+                {
+                    _isPassed = true;
+                    OnTubePassed?.Invoke();
+                }
             }
         }
-
-
     }
-
 }

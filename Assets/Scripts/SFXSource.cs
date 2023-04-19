@@ -7,9 +7,6 @@ namespace Krevechous
     [RequireComponent(typeof(AudioSource))]
     public class SFXSource : MonoBehaviour
     {
-        private static SFXSource _instance;
-        public static SFXSource Insntance => _instance;
-
         private AudioSource _source;
 
         [SerializeField] private AudioClip _pointSound;
@@ -19,15 +16,15 @@ namespace Krevechous
 
         private void Awake()
         {
-            _instance = this;
             _source = GetComponent<AudioSource>();
         }
 
-        public void Subsribe() {
+        private void Start()
+        {
             Tube.OnTubePassed.AddListener(PlayPoint);
+            Barrier.OnBarrierTouched.AddListener(PlayDie);
+            PlayerController.OnJump.AddListener(PlayFlap);
             GameManager.Instance.OnGameStart.AddListener(PlayStart);
-            GameManager.Instance.OnGameEnd.AddListener(PlayDie);
-            PlayerController.Instance.OnJump.AddListener(PlayFlap);
         }
 
         public void PlayPoint() { _source.PlayOneShot(_pointSound); }

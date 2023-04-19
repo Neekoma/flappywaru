@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 0680bfd60a989e54cab193e76e1bb836, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -198,7 +198,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 0680bfd60a989e54cab193e76e1bb836, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358a9530035c62c4e9f3a8455e413eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tube: {fileID: 7315691138640812097}
   coin: {fileID: 4828393730891191685}
 --- !u!114 &1071788040824436867
 MonoBehaviour:
@@ -424,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f78006cb6b44c64892228b90ea8d8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingOnStart: 0
 --- !u!1001 &4896766377761521556
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,30 +12,47 @@ namespace Krevechous
         private static PlayerController _instance;
         public static PlayerController Instance => _instance;
 
-        public UnityEvent OnJump;
+        public static UnityEvent OnJump = new UnityEvent();
 
         private Rigidbody2D _rb;
-        private Animator _animator;
-       
+        [SerializeField] private Animator _animator, _visualAnimator;
+
+        [SerializeField] private Transform _visualTransform;
         [SerializeField] private float jumpPower;
+
+        private Vector3 _upRotation = new Vector3(0, 0, 20);
 
         private void Awake()
         {
             _instance = this;
             _rb = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
-
-            PlayerInput inputModule = GetPlayerInput();
-            inputModule.onScreenJump.AddListener(Jump);
+            GetPlayerInput().onScreenJump.AddListener(Jump);
         }
 
         private void Start()
         {
+            GameManager.Instance.OnGameEnd.AddListener(() => {
+                _visualAnimator.SetTrigger("Die");
+            });
             _rb.isKinematic = true;
         }
 
+        private void FixedUpdate()
+        {
+            if (GameManager.Instance.isPlaying)
+            {
+                if (_rb.velocity.y > 0)
+                {
+                    _visualTransform.rotation = Quaternion.Euler(_upRotation);
+                }
+                else
+                {
+                    _visualTransform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Clamp(_rb.velocity.y * 2, -100, 0)));
+                }
+            }
+        }
+
         public void AllowToMove() {
-            _animator.enabled = false; // TODO: replace with animations
            _rb.isKinematic = false;
         }
         
@@ -47,8 +64,8 @@ namespace Krevechous
                 {
                     if (_rb.isKinematic == false)
                     {
-                        _rb.velocity = Vector2.up * jumpPower;
                         OnJump?.Invoke();
+                        _rb.velocity = Vector2.up * jumpPower;
                     }
                 }
             }

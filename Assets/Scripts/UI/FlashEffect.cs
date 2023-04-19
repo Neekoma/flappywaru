@@ -7,8 +7,12 @@ using UnityEngine.UI;
 namespace Krevechous
 {
     [RequireComponent(typeof(Image))]
-    public class FlashEffect : MonoBehaviour
+    public class FlashEffect : GamePipelineAnimation
     {
+        private static FlashEffect _instance;
+
+        public static FlashEffect Instance => _instance;
+
         [SerializeField] private Image _image;
         [SerializeField] private float _duration; // 0.1
 
@@ -17,7 +21,6 @@ namespace Krevechous
         private float _smoothness; // 0.01
 
         public UnityEvent OnFirstStepEnd;
-        public UnityEvent OnAnimEnd;
    
         [Range(0.1f, 1f)]
         private float _maxValue = 1;
@@ -27,31 +30,47 @@ namespace Krevechous
 
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+            _instance = this;
             _steps = _duration / _smoothness; // 10
             _delta = _maxValue / _steps;
         }
 
         private void Start()
         {
-            GameManager.Instance.OnGameEnd.AddListener(() => { StartCoroutine(ShowFlash(_duration)); });
-            GameManager.Instance.OnGameRestart.AddListener(() => { StartCoroutine(ShowFlash(_duration)); });
+            GameManager.Instance.OnGameEnd.AddListener(() => {Show(_duration, true, false); });
         }
 
-        private IEnumerator ShowFlash(float duration) {
+        public void Show(float duration, bool twoSteps, bool startWithSecond) {
+            StartCoroutine(ShowFlash(duration, twoSteps, startWithSecond));
+        }
+
+        private IEnumerator ShowFlash(float duration, bool twoSteps, bool startWithSecond) {
             float deltaT = duration / _steps;
-            float value = 0;
-            while (value < 1) {
-                value += _delta;
-                _image.color = new Color(0,0,0, value);
-                yield return new WaitForSeconds(deltaT);
-            }
-            OnFirstStepEnd?.Invoke();
-            while (value > 0)
+            float value = startWithSecond == false ? 0 : 1;
+            
+            if (!startWithSecond)
             {
-                value -= _delta;
-                _image.color = new Color(0, 0, 0, value);
-                yield return new WaitForSeconds(deltaT);
+                while (value < 1)
+                {
+                    value += _delta;
+                    _image.color = new Color(0, 0, 0, value);
+                    yield return new WaitForSeconds(deltaT);
+                }
+
+                OnFirstStepEnd?.Invoke();
             }
+            
+            if (twoSteps || startWithSecond)
+            {
+                while (value > 0)
+                {
+                    value -= _delta;
+                    _image.color = new Color(0, 0, 0, value);
+                    yield return new WaitForSeconds(deltaT);
+                }
+            }
+
             OnAnimEnd?.Invoke();
         }
     }

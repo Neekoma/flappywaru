@@ -8,7 +8,9 @@ namespace Krevechous.NewRecycleSystem
     {
         public static readonly float distanceBetweenTubes = 2.5f;
 
+        [SerializeField] private Tube _tube;
         [SerializeField] private Coin coin;
+        
 
         private void Start ()
         {
@@ -37,6 +39,7 @@ namespace Krevechous.NewRecycleSystem
         public override void OnRecycle()
         {
             //Работа с пулом
+            _tube._isPassed = false;
             var last = pool.recycleables.Last.Value;
 
             GetPlaceHeight(out float placeHeight, Random.Range(-1000f, 1000f), Random.Range(0f, 10f), Random.Range(0f, 10f), Random.Range(-2, 1));

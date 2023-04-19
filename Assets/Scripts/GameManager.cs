@@ -14,6 +14,7 @@ namespace Krevechous
         public UnityEvent OnGameStart;
         public UnityEvent OnGameEnd;
         public UnityEvent OnGameRestart;
+        public UnityEvent OnGameRestarted;
 
         public bool isPlaying { get; private set; } = true;
 
@@ -29,7 +30,7 @@ namespace Krevechous
 
         private void Start()
         {
-            SFXSource.Insntance.Subsribe();
+            //SFXSource.Insntance.Subsribe();
         }
 
         public void StartGame()
@@ -40,17 +41,19 @@ namespace Krevechous
         }
 
         public void StartGame(AsyncOperation op) {
-            Debug.Log("StartGameReset");
             if (op.isDone)
             {
+                OnGameRestarted?.Invoke();
                 isPlaying = true;
                 OnGameStart.Invoke();
+                //SFXSource.Insntance.PlayStart();
             }
         }
 
         public void EndGame()
         {
             isPlaying = false;
+            //SFXSource.Insntance.PlayDie();
             OnGameEnd.Invoke();
         }
 
@@ -58,7 +61,7 @@ namespace Krevechous
         {
             AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
             op.completed += StartGame;
-            OnGameRestart.Invoke();
+            OnGameRestart?.Invoke();
         }
 
     }
