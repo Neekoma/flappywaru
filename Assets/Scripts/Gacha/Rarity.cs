@@ -2,6 +2,6 @@
 {
     public enum Rarity
     {
-        Common, Rare, Legendary // обычн (флафф), редк (хент), лега (жесткач, анимки)
+        Common, Rare, Mythical, Legendary, Player, Environment // обычн (флафф), редк (хент), лега (жесткач, анимки), скин, среда
     }
 }

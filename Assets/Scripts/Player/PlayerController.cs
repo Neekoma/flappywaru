@@ -47,7 +47,7 @@ namespace Krevechous
                 }
                 else
                 {
-                    _visualTransform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Clamp(_rb.velocity.y * 2, -100, 0)));
+                    _visualTransform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Clamp(_rb.velocity.y * 4, -100, 0)));
                 }
             }
         }

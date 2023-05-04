@@ -2,7 +2,6 @@
 
 namespace Krevechous.NewRecycleSystem
 {
-
     public abstract class Recycleable : MonoBehaviour
     {
         protected RecycleablePool pool;

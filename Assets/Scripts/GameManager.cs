@@ -28,11 +28,6 @@ namespace Krevechous
             Application.targetFrameRate = 120;
         }
 
-        private void Start()
-        {
-            //SFXSource.Insntance.Subsribe();
-        }
-
         public void StartGame()
         {
             IsGameStarted = true;
@@ -46,14 +41,12 @@ namespace Krevechous
                 OnGameRestarted?.Invoke();
                 isPlaying = true;
                 OnGameStart.Invoke();
-                //SFXSource.Insntance.PlayStart();
             }
         }
 
         public void EndGame()
         {
             isPlaying = false;
-            //SFXSource.Insntance.PlayDie();
             OnGameEnd.Invoke();
         }
 
