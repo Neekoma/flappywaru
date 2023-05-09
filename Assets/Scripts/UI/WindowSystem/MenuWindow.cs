@@ -25,7 +25,6 @@ namespace Krevechous.Windows
         [Space(25)]
         [Header("События")]
         public UnityEvent<MenuWindow> OnWindowOpened;
-        public UnityEvent<MenuWindow> OnWindowHidden;
         public UnityEvent<MenuWindow> OnWindowClosed;
 
         public string title => _title;
@@ -46,26 +45,22 @@ namespace Krevechous.Windows
             Initialize();
             if (withMsg == true)
             {
-                _container.ChangeWindow(this);
                 OnWindowOpened?.Invoke(this);
             }
+            _state = WindowState.Open;
             _content.gameObject.SetActive(true);
         }
-        public void Hide()
-        {
-            _container.HideWindow(this);
-            OnWindowHidden?.Invoke(this);
-        }
+
         public void Close(bool withMsg)
         {
             if (withMsg == true)
             {
-                _container.CloseWindow(this);
                 OnWindowClosed?.Invoke(this);
             }
+            _state = WindowState.Closed;
             _content.gameObject.SetActive(false);
         }
     }
 
-    public enum WindowState { Closed, Open, Hidden }
+    public enum WindowState { Closed, Open}
 }
