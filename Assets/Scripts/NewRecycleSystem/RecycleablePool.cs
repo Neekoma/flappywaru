@@ -9,6 +9,8 @@ namespace Krevechous.NewRecycleSystem
     {
         public LinkedList<Recycleable> recycleables { get; private set; } = new LinkedList<Recycleable>();
 
+        private int _abc;
+      
         private void Awake()
         {
             for (int i = 0; i < transform.childCount; i++) {

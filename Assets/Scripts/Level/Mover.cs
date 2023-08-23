@@ -25,6 +25,7 @@ namespace Krevechous {
             if (movingOnStart) { _isCanMove = true; }
         }
 
+
         private void FixedUpdate()
         {
             if (_isCanMove)

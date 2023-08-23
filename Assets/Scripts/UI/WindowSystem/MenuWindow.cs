@@ -10,10 +10,14 @@ namespace Krevechous.Windows
         [Tooltip("Заголовок окна, отображающийся в рамке")]
         [SerializeField] private string _title;
 
+        [Header("Элементы управления")]
         [SerializeField]
         [Tooltip("Показывает заголовок окна в рамке")]
         private bool _showTitle = false;
         [SerializeField] private RectTransform _titleObject;
+        [SerializeField] private ReturnBtn _returnBtn;
+        [SerializeField] private CloseBtn _closeBtn;
+        
 
         [Space(25)]
         [Header("Управление")]
@@ -40,13 +44,15 @@ namespace Krevechous.Windows
             _titleObject.gameObject.SetActive(_showTitle);
         }
 
-        public void Open(bool withMsg)
+        public void Open(bool withMsg, bool backable)
         {
             Initialize();
             if (withMsg == true)
             {
                 OnWindowOpened?.Invoke(this);
             }
+            _closeBtn.gameObject.SetActive(_closeable);
+            _returnBtn.gameObject.SetActive(backable);
             _state = WindowState.Open;
             _content.gameObject.SetActive(true);
         }

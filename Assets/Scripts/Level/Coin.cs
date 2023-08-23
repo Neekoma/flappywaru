@@ -9,14 +9,7 @@ namespace Krevechous
     {
         public static UnityEvent OnCoinPicked = new UnityEvent();
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.tag == Tags.PLAYER_TAG)
-            {
-                OnCoinPicked?.Invoke();
-                gameObject.SetActive(false);
-            }
-        }
+        
     }
 }
 

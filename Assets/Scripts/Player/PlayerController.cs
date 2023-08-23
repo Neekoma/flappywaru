@@ -26,13 +26,16 @@ namespace Krevechous
         {
             _instance = this;
             _rb = GetComponent<Rigidbody2D>();
+            //Barrier.OnBarrierTouched.AddListener(OnDie);
             GetPlayerInput().onScreenJump.AddListener(Jump);
         }
 
         private void Start()
         {
-            GameManager.Instance.OnGameEnd.AddListener(() => {
+            GameManager.Instance.OnGameEnd.AddListener(() =>
+            {
                 _visualAnimator.SetTrigger("Die");
+                OnDie();
             });
             _rb.isKinematic = true;
         }
@@ -52,10 +55,16 @@ namespace Krevechous
             }
         }
 
-        public void AllowToMove() {
-           _rb.isKinematic = false;
+        public void OnDie()
+        {
+            _rb.constraints = RigidbodyConstraints2D.None;
         }
-        
+
+        public void AllowToMove()
+        {
+            _rb.isKinematic = false;
+        }
+
         public void Jump()
         {
             if (GameManager.Instance.isPlaying)
@@ -74,15 +83,14 @@ namespace Krevechous
         /** <summary>Выбор управления в соответствии с управлением и добавление компонента на объект</summary>*/
         private PlayerInput GetPlayerInput()
         {
-
-            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+            if (Application.isMobilePlatform)
             {
-                Debug.Log("Выбрана схема: Mobile");
+                //Debug.Log("Выбрана схема: Mobile");
                 return gameObject.AddComponent<PlayerInputMobile>();
             }
             else
             {
-                Debug.Log("\"Выбрана схема: Desktop");
+                //Debug.Log("Выбрана схема: Desktop");
                 return gameObject.AddComponent<PlayerInputPC>();
             }
         }

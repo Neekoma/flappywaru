@@ -30,10 +30,7 @@ namespace Krevechous.NewRecycleSystem
 
         private void SetupOtherObjects()
         {
-            if (Random.Range(1, 4) == 1) // 1/3
-            {
-                coin?.gameObject.SetActive(true);
-            }
+            
         }
 
         public override void OnRecycle()

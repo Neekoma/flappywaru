@@ -1,5 +1,4 @@
-﻿using Mono.Cecil.Cil;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -11,7 +10,7 @@ namespace Krevechous.Windows
     public class MenuScreen : MonoBehaviour
     {
 
-        /**<summary>Первое окно в иерархии по умолчанию явлется стартовым</summary>*/
+        //Первое окно в иерархии по умолчанию явлется стартовым
         private MenuWindow _startWindow;
 
         private MenuWindow[] _windows;
@@ -31,7 +30,7 @@ namespace Krevechous.Windows
             _currentWindow = _startWindow;
             for (int i = 1; i < transform.childCount; i++)
                 _windows[i].Close(false);
-            _windows[0].Open(false);
+            _windows[0].Open(false, false);
         }
 
         private void Update()
@@ -50,6 +49,7 @@ namespace Krevechous.Windows
         public void ChangeWindow(MenuWindow window, bool isBack)
         {
             var last = _sequence.Last.Value;
+            //FlashEffect.Instance.Show(1, true, false);
             
             if (isBack)
             {
@@ -62,13 +62,12 @@ namespace Krevechous.Windows
                 _sequence.AddLast(window);
 
             last.Close(true);
-            _sequence.Last.Value.Open(true);
+            _sequence.Last.Value.Open(true, _sequence.Count > 1 ? true : false);
         }
 
         public void CloseWindow(MenuWindow window)
         {
             Debug.Log($"Закрыть окно {window.title}");
-
         }
 
         public void Back()

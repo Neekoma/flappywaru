@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Krevechous.NewRecycleSystem;
-using System.Security.Principal;
-using Codice.Client.Common;
 
 [CustomEditor(typeof(RecycleablePool))]
 public class TubesEditmodePlacer : Editor {

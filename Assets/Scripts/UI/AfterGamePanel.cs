@@ -22,7 +22,7 @@ public class AfterGamePanel : MonoBehaviour
     }
 
     public void ShowAfterGame() {
-        bestScoreVal = PlayerPrefs.GetInt("Score", 0);
+        bestScoreVal = PlayerPrefs.GetInt("Score");
         _bestScoreDisp.text = bestScoreVal.ToString();
         _currentScoreDisp.text = PlayerRepository.Instance.score.ToString();
         _container.SetActive(true);
