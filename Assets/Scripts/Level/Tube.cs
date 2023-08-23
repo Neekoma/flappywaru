@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using Krevechous.NewRecycleSystem;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Experimental.AI;
 
-public class Tube : MonoBehaviour
+namespace Krevechous
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(BoxCollider2D))]
+    public sealed class Tube : MonoBehaviour
     {
-        
+        public static UnityEvent OnTubePassed = new UnityEvent();
+
+        public bool _isPassed { get; set; } = false;
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (_isPassed == false)
+            {
+                if (collision.gameObject.tag == Tags.PLAYER_TAG)
+                {
+                    _isPassed = true;
+                    OnTubePassed?.Invoke();
+                }
+            }
+        }
     }
 }

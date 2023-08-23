@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
+using UnityEditor;
 
-public class Coin : MonoBehaviour
+namespace Krevechous
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(Collider2D))]
+    public sealed class Coin : MonoBehaviour
     {
-        
-    }
+        public static UnityEvent OnCoinPicked = new UnityEvent();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == Tags.PLAYER_TAG)
+            {
+                OnCoinPicked?.Invoke();
+                gameObject.SetActive(false);
+            }
+        }
     }
 }
+

@@ -6,8 +6,8 @@ namespace Krevechous {
     {
         protected override void CheckInputs()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                onScreenJump.Invoke();           
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+                onScreenJump.Invoke();
             }
         }
     }
