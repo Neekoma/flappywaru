@@ -1,97 +1,108 @@
-﻿using System.Collections;
+﻿using Krevechous.Core;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
-namespace Krevechous
+namespace Krevechous.Player
 {
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IResetable
     {
-        private static PlayerController _instance;
-        public static PlayerController Instance => _instance;
+        private NewGameManager _gm;
 
-        public static UnityEvent OnJump = new UnityEvent();
+        private Vector3 _defaultPosition;
+        private bool _isReset = true;
 
-        private Rigidbody2D _rb;
-        [SerializeField] private Animator _animator, _visualAnimator;
-
+        [SerializeField] private Animator _positionAnimator, _visualAnimator;
         [SerializeField] private Transform _visualTransform;
         [SerializeField] private float jumpPower;
 
-        private Vector3 _upRotation = new Vector3(0, 0, 20);
+        private Rigidbody2D _rb;
+        private PlayerInputHandler _movementHandler;
+
+        public UnityEvent OnJump;
+
+        public Animator positionAnimator => _positionAnimator;
+        public Animator visualAnimator => _visualAnimator;
+
+
+        [Inject]
+        public void Construct(NewGameManager gm, PlayerInputHandler movementHandler)
+        {
+            _gm = gm;
+            _movementHandler = movementHandler;
+        }
 
         private void Awake()
         {
-            _instance = this;
             _rb = GetComponent<Rigidbody2D>();
-            //Barrier.OnBarrierTouched.AddListener(OnDie);
-            GetPlayerInput().onScreenJump.AddListener(Jump);
-        }
-
-        private void Start()
-        {
-            GameManager.Instance.OnGameEnd.AddListener(() =>
-            {
-                _visualAnimator.SetTrigger("Die");
-                OnDie();
-            });
             _rb.isKinematic = true;
+            _defaultPosition = transform.position;
         }
 
-        private void FixedUpdate()
+        public void SaveDefaultState()
         {
-            if (GameManager.Instance.isPlaying)
-            {
-                if (_rb.velocity.y > 0)
-                {
-                    _visualTransform.rotation = Quaternion.Euler(_upRotation);
-                }
-                else
-                {
-                    _visualTransform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Clamp(_rb.velocity.y * 4, -100, 0)));
-                }
-            }
+            // Nothing to do...
+        }
+
+        public void ApplyDefaultState()
+        {
+            _isReset = false;
+            _visualAnimator.SetTrigger("Idle");
+            _rb.velocity = Vector2.zero;
+            _rb.isKinematic = true;
+            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            transform.position = _defaultPosition;
+            _positionAnimator.enabled = true;
+            _isReset = true;
+        }
+
+        private void OnEnable()
+        {
+            _gm.OnGameStart += AllowToMove;
+            _movementHandler.OnJump += Jump;
+        }
+
+        private void OnDisable()
+        {
+            _gm.OnGameStart -= AllowToMove;
+            _movementHandler.OnJump -= Jump;
+        }
+
+        private void Update()
+        {
+            if (_isReset)
+                _movementHandler.HandleMovementInputs();
         }
 
         public void OnDie()
         {
+            _visualAnimator.SetTrigger("Die");
             _rb.constraints = RigidbodyConstraints2D.None;
+
         }
 
         public void AllowToMove()
         {
             _rb.isKinematic = false;
+            _positionAnimator.enabled = false;
         }
 
         public void Jump()
         {
-            if (GameManager.Instance.isPlaying)
+            if (_gm.isGameStarted && !_gm.isGamePaused)
             {
                 if (transform.position.y < 5.5f)
                 {
                     if (_rb.isKinematic == false)
                     {
-                        OnJump?.Invoke();
                         _rb.velocity = Vector2.up * jumpPower;
+                        OnJump?.Invoke();
                     }
-                }
-            }
-        }
 
-        /** <summary>Выбор управления в соответствии с управлением и добавление компонента на объект</summary>*/
-        private PlayerInput GetPlayerInput()
-        {
-            if (Application.isMobilePlatform)
-            {
-                //Debug.Log("Выбрана схема: Mobile");
-                return gameObject.AddComponent<PlayerInputMobile>();
-            }
-            else
-            {
-                //Debug.Log("Выбрана схема: Desktop");
-                return gameObject.AddComponent<PlayerInputPC>();
+                }
             }
         }
     }

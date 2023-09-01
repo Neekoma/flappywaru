@@ -1,26 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using Krevechous.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Krevechous.NewRecycleSystem
 {
-
     public class TubesRecycleable : Recycleable
     {
+        private NewGameManager _gm;
+
         public static readonly float distanceBetweenTubes = 2.5f;
 
         [SerializeField] private Tube _tube;
-        [SerializeField] private Coin coin;
         
 
-        private void Start ()
+        [Inject]
+        public void Construct(NewGameManager gm) {
+            _gm = gm;
+        }
+
+        private void OnEnable()
         {
-            StartPlacement();
+            _gm.OnGameStart += StartPlacement;
+        }
+
+        private void OnDisable()
+        {
+            _gm.OnGameStart -= StartPlacement;
         }
 
         private void StartPlacement() {
             GetPlaceHeight(out float placeHeight, Random.Range(-1000f, 1000f), Random.Range(0f, 10f), Random.Range(0f, 10f), Random.Range(-2, 1));
             transform.position = new Vector3(transform.position.x, placeHeight, 0);
-            SetupOtherObjects();
         }
 
         private void GetPlaceHeight(out float placeHeight, float x, float a, float b, float c) // [-3; 2]
@@ -28,15 +38,8 @@ namespace Krevechous.NewRecycleSystem
             placeHeight = (Mathf.Sin(x * a) * Mathf.Cos(x * b)) * c;
         }
 
-        private void SetupOtherObjects()
-        {
-            
-        }
-
         public override void OnRecycle()
         {
-            //Работа с пулом
-            _tube._isPassed = false;
             var last = pool.recycleables.Last.Value;
 
             GetPlaceHeight(out float placeHeight, Random.Range(-1000f, 1000f), Random.Range(0f, 10f), Random.Range(0f, 10f), Random.Range(-2, 1));
@@ -46,7 +49,7 @@ namespace Krevechous.NewRecycleSystem
             pool?.recycleables.RemoveFirst();
             pool?.recycleables.AddLast(this);
 
-            SetupOtherObjects();
+            _tube.OnRecycle();
         }
     }
 }

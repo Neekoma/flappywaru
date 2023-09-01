@@ -1,34 +1,61 @@
-﻿using System;
+﻿using Krevechous.Core;
+using Krevechous.Player;
 using UnityEngine;
-using UnityEngine.Events;
+using Zenject;
 
-namespace Krevechous {
-    public class Barrier: MonoBehaviour, IResetable
+namespace Krevechous
+{
+    public class Barrier : MonoBehaviour
     {
-        public static UnityEvent OnBarrierTouched = new UnityEvent();
+        [SerializeField] private PlayerController _pController;
 
-        public void Reset(object sender, EventArgs args)
+        private NewGameManager _gm;
+
+        public static bool EnabledToDamage { get; private set; } = true;
+
+
+        [Inject]
+        public void Construct(NewGameManager gm, PlayerController pc)
         {
-            throw new NotImplementedException();
+            _gm = gm;
+            _pController = pc;
         }
 
-        public void SaveStartState()
+        private void OnEnable()
         {
-            throw new NotImplementedException();
+            _gm.OnGameStart += EnableDamage;
+            _gm.OnGameReset += DisableDamage;
+        }
+
+        private void OnDisable()
+        {
+            _gm.OnGameStart -= EnableDamage;
+            _gm.OnGameReset -= DisableDamage;
+        }
+
+        private void EnableDamage()
+        {
+            EnabledToDamage = true;
+        }
+
+        private void DisableDamage()
+        {
+            EnabledToDamage = false;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (GameManager.Instance.isPlaying)
+            if (EnabledToDamage)
             {
                 if (collision.gameObject.tag == Tags.PLAYER_TAG)
                 {
-                    OnBarrierTouched?.Invoke();
-                    GameManager.Instance.EndGame();
+                    if (_gm.isGameStarted)
+                    {
+                        _pController.OnDie();
+                        _gm.EndGame();
+                    }
                 }
             }
         }
-
     }
-
 }

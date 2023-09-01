@@ -16,11 +16,11 @@ PlayerSettings:
   productName: Leprechaun in the clouds
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.254717, g: 0.12375402, b: 0.14470807, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
-  m_SplashScreenAnimation: 1
+  m_SplashScreenAnimation: 0
   m_SplashScreenLogoStyle: 1
   m_SplashScreenDrawMode: 0
   m_SplashScreenBackgroundAnimationZoom: 1
@@ -39,15 +39,13 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 4c7f56942b3135c41abf2a9d5286496a, type: 3}
-    duration: 2
+  m_SplashScreenLogos: []
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
   defaultScreenHeight: 1080
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidthWeb: 9
+  defaultScreenHeightWeb: 16
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_SpriteBatchVertexThreshold: 300
@@ -523,7 +521,15 @@ PlayerSettings:
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
   m_TemplateCustomTags:
+    BANNER_DYNAMIC_1: 
+    BANNER_DYNAMIC_2: 
+    BANNER_STATIC_1: 
+    BANNER_STATIC_2: 
+    BAR_COLOR: 
     PRODUCT_DESCRIPTION: 
+    SET_1_TO_DISABLE_FIXEDSCREEN_ON_DESKTOP: 
+    SET_1_TO_DISABLE_FIXEDSCREEN_ON_MOBILE: 1
+    SET_1_TO_DISABLE_SHADOWS: 
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -786,7 +792,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: PROJECT:ChikasYG1.4
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1

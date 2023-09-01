@@ -120,9 +120,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.137218}
   m_SpriteTilingProperty:
-    border: {x: 0.1328125, y: 0, z: 0.140625, w: 0.33398438}
+    border: {x: 0.1328125, y: 0, z: 0.14062501, w: 0.33449477}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 3.6035156}
+    oldSize: {x: 0.9375, y: 3.6090226}
     newSize: {x: 1, y: 15.518015}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
@@ -263,9 +263,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.09370971}
   m_SpriteTilingProperty:
-    border: {x: 0.1328125, y: 0, z: 0.140625, w: 0.33398438}
+    border: {x: 0.1328125, y: 0, z: 0.14062501, w: 0.33449477}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 3.6035156}
+    oldSize: {x: 0.9375, y: 3.6090226}
     newSize: {x: 1, y: 15.073675}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
@@ -300,7 +300,6 @@ GameObject:
   - component: {fileID: 979990522308547217}
   - component: {fileID: 7315691138640812097}
   - component: {fileID: 3567837216602023692}
-  - component: {fileID: 1071788040824436867}
   m_Layer: 0
   m_Name: Tube
   m_TagString: Untagged
@@ -461,6 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794292faeb3e5af4d88121b08727d35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 724036398653334068}
 --- !u!114 &3567837216602023692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,17 +474,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tube: {fileID: 7315691138640812097}
-  coin: {fileID: 0}
---- !u!114 &1071788040824436867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299796814222693334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f78006cb6b44c64892228b90ea8d8ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingOnStart: 0

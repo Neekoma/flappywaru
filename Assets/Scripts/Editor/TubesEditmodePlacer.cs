@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEditor;
 using Krevechous.NewRecycleSystem;
 
-[CustomEditor(typeof(RecycleablePool))]
+[CustomEditor(typeof(TubesPool))]
 public class TubesEditmodePlacer : Editor {
    
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        RecycleablePool pool = (RecycleablePool)target;
+        TubesPool pool = (TubesPool)target;
 
         if (GUILayout.Button("Place with distance")) {
             for (int i = 1; i < pool.transform.childCount; i++) {

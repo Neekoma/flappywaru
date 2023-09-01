@@ -4,11 +4,11 @@ namespace Krevechous.NewRecycleSystem
 {
     public abstract class Recycleable : MonoBehaviour
     {
-        protected RecycleablePool pool;
+        protected IRecycleablePool pool;
 
         private void Awake()
         {
-            transform.parent.TryGetComponent<RecycleablePool>(out pool);
+            transform.parent.TryGetComponent<IRecycleablePool>(out pool);
         }
 
         public abstract void OnRecycle();
