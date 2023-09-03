@@ -34,7 +34,9 @@ namespace Krevechous.Core
         {
             isGameStarted = true;
             OnGameStart?.Invoke();
-            YandexGame.StickyAdActivity(false);
+
+            if (YandexGame.EnvironmentData.isDesktop == false)
+                YandexGame.StickyAdActivity(false);
         }
 
         public void EndGame()
@@ -42,7 +44,8 @@ namespace Krevechous.Core
             isGameStarted = false;
             PauseGame();
             OnGameEnd?.Invoke();
-            YandexGame.StickyAdActivity(true);
+            if (YandexGame.EnvironmentData.isDesktop == false)
+                YandexGame.StickyAdActivity(true);
         }
 
         public void PauseGame()

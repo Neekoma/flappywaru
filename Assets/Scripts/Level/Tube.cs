@@ -7,7 +7,6 @@ using Zenject;
 
 namespace Krevechous
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
     public sealed class Tube : MonoBehaviour, IMoveable, IResetable, IRecycleable
@@ -60,7 +59,7 @@ namespace Krevechous
         {
             if (collision.gameObject.tag == Tags.PLAYER_TAG)
             {
-                if (!_isPassed)
+                if (!_isPassed && _gm.isGameStarted)
                 {
                     _gm.IncrementScore(1);
                     _isPassed = true;

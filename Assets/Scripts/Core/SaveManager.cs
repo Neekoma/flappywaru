@@ -6,8 +6,10 @@ namespace Krevechous.Core
 {
     public class SaveManager
     {
-        public void SaveLanguage(Language language) {
+        public void SaveLanguage(Language language)
+        {
             PlayerPrefs.SetInt("Language", (int)language);
+            PlayerPrefs.Save();
         }
 
         public int LoadLanguage()
@@ -15,12 +17,14 @@ namespace Krevechous.Core
             return PlayerPrefs.GetInt("Language", -1);
         }
 
-        public void SaveBestScore(int score) {
+        public void SaveBestScore(int score)
+        {
             YandexGame.savesData.bestScore = score;
             YandexGame.SaveProgress();
         }
 
-        public int LoadBestScore() {
+        public int LoadBestScore()
+        {
             int bestScore = YandexGame.savesData.bestScore;
             return bestScore;
         }

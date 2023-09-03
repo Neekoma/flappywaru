@@ -1,7 +1,7 @@
 using Krevechous.Core;
 using System;
-using System.Diagnostics;
 using YG;
+
 
 namespace Krevechous.Localization
 {
@@ -16,9 +16,10 @@ namespace Krevechous.Localization
         public LocalizationManager(SaveManager saves)
         {
             _saves = saves;
+        }
 
-            YandexGame.LanguageRequest();
-
+        public void CheckStartupLanguage()
+        {
             int savedLanguage = _saves.LoadLanguage();
 
             if (savedLanguage == -1)
@@ -33,11 +34,16 @@ namespace Krevechous.Localization
                     case "tr":
                         currentLanguage = Language.Turk;
                         break;
-                    default:
+                    case "en":
                         currentLanguage = Language.Eng;
+                        break;
+                    default:
+                        currentLanguage = Language.Rus;
                         break;
                 }
             }
+            else
+                currentLanguage = (Language) savedLanguage;
 
             ChangeLanguage(currentLanguage, withSave: false);
         }

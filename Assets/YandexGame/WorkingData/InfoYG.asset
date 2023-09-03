@@ -26,8 +26,8 @@ MonoBehaviour:
   adDisplayCalls: 0
   fullscreenAdInterval: 60
   durationOfAdSimulation: 0.5
-  LocalizationEnable: 1
-  callingLanguageCheck: 0
+  LocalizationEnable: 0
+  callingLanguageCheck: 1
   translateMethod: 1
   domainAutoLocalization: com
   CSVFileTranslate:
@@ -120,7 +120,7 @@ MonoBehaviour:
     hi: 
   debug: 0
   archivingBuild: 1
-  bakcgroundImage: 0
+  bakcgroundImage: 1
   pixelRatioEnable: 0
   pixelRatioValue: 1
   SDKStartDelay: 0
